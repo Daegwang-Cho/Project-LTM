@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="www.thymeleaf.org" 
+	  lang="en">
+<head>
+	<link rel="stylesheet" href="/css/PlaylistModal.css">
+</head>
+<body>
+<th:block th:fragment="createForm">
+
+
+	<div class="content">
+		
+		<form th:action="@{/playlist/new}" th:object="${playListFormDto}"
+			method="post">
+			<div class="header">
+				<h2>플레이리스트 만들기</h2>
+			</div>
+			<div class="content-body">
+			<div class="title-form">
+				<label th:for="title"><span>제목 :</span></label> 
+				<input type="text"
+					th:field="*{title}" class="title">
+			</div>
+			<div class="discription-form">
+				<label th:for="discription"><span>설명</span></label> 
+				<input type="text"
+					th:field="*{discription}" class="discription">
+			</div>
+			</div>
+			
+			<div class="content-footer">
+				<button type="button" class="btn-cancel">취소</button>
+				<button type="submit" class="btn-create">만들기</button>
+			</div>
+		</form>
+		
+	</div>
+
+	
+
+</th:block>
+</body>
+
+</html>

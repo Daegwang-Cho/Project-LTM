@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>게시글 작성</title>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
+<link rel='stylesheet' href='https://unpkg.com/@yaireo/dragsort/dist/dragsort.css'>
+<link rel="stylesheet" href="/css/hashtag.css" />
+</head>
+<body layout:fragment="content">
+	<div class="container" style="padding-top: 95px; padding-left: 25px;">
+		<div>
+		<img src="/2026001.svg" style="width: 50px;">
+			<h1>공지사항</h1>
+		</div>
+			<form th:object="${adboardFormDto}" method="post" enctype="multipart/form-data" class="form-floating">
+
+		<div class="mb-3">
+			<p style="color: red;" th:if="${#fields.hasErrors('adtitle')}" th:errors="*{adtitle}" class="fieldError"></p>
+			<input class="form-control" type="text" th:field="*{adtitle}" name="adtitle" id="adtitle" placeholder="제목">
+		</div>
+			<p style="color: red;" th:if="${#fields.hasErrors('adbody')}" th:errors="*{adbody}"></p>
+			<textarea name="content" id="content" th:field="*{adbody}"></textarea>
+				<script type="text/javascript"> <!-- 작성 script -->
+					CKEDITOR.replace('content',{height : 300});
+				</script>
+		<div class="mb-3">
+			<input class="form-control" type="text" placeholder="태그" name="tags" id="tags">
+				<script src='https://unpkg.com/@yaireo/tagify'></script> <!-- 태그 script -->
+				<script src='https://unpkg.com/@yaireo/dragsort'></script>
+				<script>
+					var input = document.querySelector('input[name=tags]');                  
+					var tagify = new Tagify(input, {originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')})
+					var dragsort = new DragSort(tagify.DOM.scope, {selector: '.'+tagify.settings.classNames.tag, callbacks: {dragEnd: onDragEnd}})
+					function onDragEnd(elm){tagify.updateValueByDOMTags()} tagify.on('change', e => console.log(e.detail.value))
+				</script>
+		</div>
+			<div style="padding-top: 30px">		
+				<a class="btn btn-light" th:href="@{|/adboard/list|}" onclick="cancel">돌아가기</a>
+				<input style="float: right;" class="btn btn-light" type="submit" value="등록">
+			</div>
+			</form>
+	</div>
+</body>
+</html>

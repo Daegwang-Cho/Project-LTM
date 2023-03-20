@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1><input type="hidden" th:text="${searchWord}"> 검색 결과</h1>
+
+	<hr>	
+	
+	<ul th:each="lists : ${songList}">
+		<li th:text="${lists.name}"></li>
+		<li th:text="${lists.artist}"></li>
+		<li><img th:src="${lists.image[0]['#text']}"></li>
+		<li><a sec:authorize="isAuthenticated()" target="_blank" href="#" th:onclick="input('[(${lists.name})]','[(${lists.artist})]')">노래넣기</a></li>
+						<!-- 회원 id까지 넣어주기 -->
+	</ul>
+
+</body>
+<!-- 모달창으로 바꿔주기 -->
+<script>
+    function input(songTitle,singer){
+    	var option = 
+    		"toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=500, height=500, top=0,left=0";
+
+    	
+        window.open(
+            "/playlist/inputsong?songTitle="+songTitle+"&singer="+singer,
+            "_blank",
+            option             
+        );
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>게시글 작성</title>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<link rel='stylesheet' href='https://unpkg.com/@yaireo/tagify/dist/tagify.css'>
+<link rel='stylesheet' href='https://unpkg.com/@yaireo/dragsort/dist/dragsort.css'>
+<link rel="stylesheet" href="/css/hashtag.css" />
+<script>
+	let slide = document.getElementById("Slide");
+	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
+
+	setInterval(()=>{
+	let ranNum = Math.floor(Math.random() * imgArr.length);
+	Slide.src= imgArr[ranNum];
+	},2000);
+</script>
+</head>
+<body layout:fragment="content" onload="showImage()">
+	<div class="container" style="padding-top: 95px; padding-left: 25px;">
+		<div>
+		<img src="/2026001.svg" style="width: 50px;">
+			<h1>Talk</h1>
+		</div>
+			<form th:object="${cboardFormDto}" method="post" enctype="multipart/form-data" class="form-floating">
+		
+		<div class="mb-3">
+			<p style="color: red;" th:if="${#fields.hasErrors('ctitle')}" th:errors="*{ctitle}" class="fieldError"></p>
+			<input class="form-control" type="text" th:field="*{ctitle}" name="ctitle" id="ctitle" placeholder="제목">
+		</div>
+		<div style="height: 0; width:500px; margin-left: 1000px;">
+			<a th:href="@{/playlist/list}" target="_blank">
+				<img src="/images/cry_music.png" alt="" id="Slide" style="width: 230px; height: 500px; margin-left: 180px">
+			</a>
+		</div>
+			<p style="color: red;" th:if="${#fields.hasErrors('cbody')}" th:errors="*{cbody}"></p>
+			<textarea name="content" id="content" th:field="*{cbody}"></textarea>
+				<script type="text/javascript"> <!-- 작성 script -->
+					CKEDITOR.replace('content',{height : 300});
+				</script>
+		<div class="mb-3">
+			<input class="form-control" type="text" placeholder="태그" name="tags" id="tags">
+				<script src='https://unpkg.com/@yaireo/tagify'></script> <!-- 태그 script -->
+				<script src='https://unpkg.com/@yaireo/dragsort'></script>
+				<script>
+					var input = document.querySelector('input[name=tags]');                  
+					var tagify = new Tagify(input, {originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')})
+					var dragsort = new DragSort(tagify.DOM.scope, {selector: '.'+tagify.settings.classNames.tag, callbacks: {dragEnd: onDragEnd}})
+					function onDragEnd(elm){tagify.updateValueByDOMTags()} tagify.on('change', e => console.log(e.detail.value))
+				</script>
+		</div>
+			<div style="padding-top: 30px">		
+				<a class="btn btn-light" th:href="@{|/cboard/list|}" onclick="cancel">돌아가기</a>
+				<input style="float: right;" class="btn btn-light" type="submit" value="등록">
+			</div>
+			</form>
+	</div>
+</body>
+</html>

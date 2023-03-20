@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" 
+	  layout:decorate="~{layout}"
+	  lang="en">
+	  
+<body>
+<div layout:fragment="content" class="blog-area section_padding_100 mt-100">
+	<div class="container">
+		<div class="row justify-content-center">
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>제목</th>
+				<th>설명</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="list : ${mylist}">
+				<td th:text="${list.id}"></td>
+				<td><a href="#" th:href="@{/playlist/{id}/song (id=${list.id})}" th:text="${list.title}"></a></td>
+				<td th:text="${list.discription}"></td>
+				<td><a href="#" th:href="@{/playlist/{id}/update (id=${list.id})}"
+						 role="button">수정하기</a></td>
+				<td><a href="#" th:onclick="deletePl('[[${list.id}]]')"
+						 role="button">삭제하기</a></td>	
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
+</div>
+</div>
+
+</body>
+<script layout:fragment="script" type='text/javascript'>
+	function deletePl(plId) {
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "/playlist/delete");
+		var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "plId");
+        hiddenField.setAttribute("value", plId);
+        form.appendChild(hiddenField);
+		
+		document.body.appendChild(form);
+		form.submit();
+	}
+</script>
+</html>

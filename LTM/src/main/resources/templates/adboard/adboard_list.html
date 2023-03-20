@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:th="http://www.tdymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>게시글 리스트</title>
+	<link rel="stylesheet" href="/css/cboard_list.css"/>
+<script>
+	let slide = document.getElementById("Slide");
+	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
+
+	setInterval(()=>{
+	let ranNum = Math.floor(Math.random() * imgArr.length);
+	Slide.src= imgArr[ranNum];
+	},2000);
+</script>
+</head>
+<body onload="showImage()">
+	<div layout:fragment="content" class="container" style="padding-top: 130px; padding-left: 80px; width: 1000px; height: 1500px">
+		<div>
+		<img src="/2026001.svg" style="width: 50px;">
+			<h1>공지사항</h1>
+		</div>
+		<table style="width: 90%;">
+			<thead>
+				<tr style="border-bottom: 1px solid #e9e9e9; text-align: center; height: 50px">
+					<td style="padding-right: 20px">번호</td>
+					<td>제목</td>
+					<td>작성자</td>
+					<td>작성일</td>
+					<td>조회수</td>
+				</tr>
+			</thead>
+		<tbody>
+			<tr th:each="adboard, loop : ${paging}" style="height: 50px">
+				<td style="border-bottom: 1px solid #e9e9e9; text-align: center; padding-right: 20px" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+				<td style="border-bottom: 1px solid #e9e9e9;">
+					<a th:href="@{|/adboard/detail/${adboard.id}|}" th:text="${adboard.adtitle}"></a>
+				</td>
+					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;"><span th:if="${adboard.username != null}" th:text="${adboard.username.username}"></span></td>
+					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${#temporals.format(adboard.wdate, 'yyyy.MM.dd')}"></td>
+					<td style="border-bottom: 1px solid #e9e9e9; color:blue; text-align: center;" th:text="${adboard.view}"></td>
+			</tr>
+		</tbody>
+		<div style="height: 0; width:500px; margin-left: 850px;">
+			<a th:href="@{/playlist/list}" target="_blank">
+				<img src="/images/cry_music.png" alt="" id="Slide" style="width: 230px; height: 500px; margin-left: 50px; margin-top: 100px">
+			</a>
+		</div>
+	</table>
+	
+	<form>
+			
+				<a class="btn btn-light" style="float: right; margin-top: 35px; margin-right: 85px;"  sec:authorize="hasRole('ADMIN')" th:href="@{/adboard/create}">글쓰기</a>
+		</form>
+	<div th:if="${paging}" aria-label="Page navigation example" style="margin-left: 290px; padding-top: 30px;">
+		<ul style="list-style: none;" class="pagination">
+			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+					<span style="color: black;">이전</span>
+				</a>
+			</li>
+			<li class="page-item" th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+				th:if="${page >= paging.number-3 and page <= paging.number+3}"
+				th:classappend="${page == paging.number} ? 'active'">
+				<a style="color: black;" class="page-link" th:text="${page}" th:href="@{|?page=${page}|}"></a>
+			</li>
+			<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+					<span style="color: black;">다음</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	</div>
+</body>
+</html>

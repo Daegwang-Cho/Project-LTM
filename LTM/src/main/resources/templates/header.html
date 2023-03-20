@@ -1,0 +1,103 @@
+<div th:fragment="navbarFragment" >
+
+    <!-- Gradient Background Overlay -->
+    
+    <div class="gradient-background-overlay"></div>
+
+    <!-- Header Area Start -->
+    <header class="header-area">
+      <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12 h-100">
+            <div class="main-menu h-100">
+              <nav class="navbar h-100 navbar-expand-lg">
+                <!-- Logo Area  -->
+                <a class="navbar-brand" th:href="@{/main}">
+                  <img src="/img/logo5.png" alt="Logo"/>
+                </a>
+
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#studioMenu"
+                  aria-controls="studioMenu"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <i class="fa fa-bars"></i> Menu
+                </button>
+
+                <div class="collapse navbar-collapse" id="studioMenu">
+                  <!-- Menu Area Start  -->
+                  <ul class="navbar-nav ml-auto">
+                  <a class="nav-link" sec:authorize="hasRole('ADMIN')" th:href="@{/main}">관리자페이지</a>
+                    <li class="nav-item active">
+                      <a class="nav-link" th:href="@{/main}"
+                        >Home <span class="sr-only">(current)</span></a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/playlist/list}">Playlist</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/cboard/list}">Community</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/adboard/list}">notice</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/event}">Event</a>
+                    </li>
+                     <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/wishlist}">Mypage</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >MyPages</a>
+                      <div
+                        class="dropdown-menu"
+                        aria-labelledby="navbarDropdown"
+                      >
+                        <a class="dropdown-item" href="/member/mypage">MyList</a>
+                        <a class="dropdown-item" href="">Account</a>
+                      </div> -->
+
+                    <li class="nav-item">
+                      <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">LOGIN</a>
+                      <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/}">LOGOUT</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header Area End -->
+
+    <!-- Social Sidebar Area Start -->
+    <div class="social-sidebar-area bg-white">
+      <!-- Social Area(fa fa-*에 등록된 sns면 추가도 가능) -->
+      <div class="social-info-area">
+          <a href="#" data-toggle="tooltip" data-placement="right" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i> <span>Facebook</span></a>
+          <a href="#" data-toggle="tooltip" data-placement="right" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i> <span>Twitter</span></a>
+          <a href="#" data-toggle="tooltip" data-placement="right" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i> <span>Instagram</span></a>
+          <a href="#" data-toggle="tooltip" data-placement="right" title="Youtube"><i class="fa fa-youtube" aria-hidden="true"></i> <span>Youtube</span></a>
+      </div>
+      <!-- Message Box -->
+      <div class="message-box">
+          <a href="#" ><img src="/img/logos.jpg" alt=""></a></a>
+      </div>
+  </div>
+  <!-- Social Sidebar Area End -->
+  
+</div>

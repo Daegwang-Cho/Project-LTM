@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8">
+<title>게시글</title>
+<!-- 커뮤니티 css -->
+<link rel="stylesheet" href="/css/cboard_list.css" />
+<script>
+	let slide = document.getElementById("Slide");
+	let imgArr = ["/images/cry_music.png", "/images/rock_music.png", "/images/listen_music.png"];
+
+	setInterval(()=>{
+	let ranNum = Math.floor(Math.random() * imgArr.length);
+	Slide.src= imgArr[ranNum];
+	},2000);
+</script>
+</head>
+<body onload="showImage()">
+<div layout:fragment="content" class="blog-area section_padding_100 mt-100" style="height: 1950px">
+   <div class="container">
+	  <div>
+	  <img src="/2026001.svg" style="width: 50px;">
+	  	 <h1>Talk</h1>
+	  </div>
+      <div>
+         <ul style="padding-left: 0;">
+            <li>
+               <div>
+                  <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9; font-size: x-large;">[[${cboard.ctitle}]]</div>
+                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 8px">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
+               </div>
+            </li>
+         <li  th:if="${cboard.username != null}">
+            <div>
+               <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9;">[[${cboard.username.username}]]</div>
+               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 3px">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</div>      
+            </div>
+         </li>
+         <li>
+            <div style="border-bottom: 1px solid #e9e9e9;">
+               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid #e9e9e9;" th:utext="${cboard.cbody}"></div>
+            </div>
+            <div style="height: 0; width:500px; margin-left: 1000px;">
+				<a th:href="@{/playlist/list}" target="_blank">
+					<img src="/images/cry_music.png" alt="" id="Slide" style="width: 230px; height: 500px; margin-left: 80px; margin-top: 50px">
+				</a>
+			</div>
+         </li>         
+            <li>
+               <div>
+                  <div style="color: gray;">해시태그 : [[${cboard.tags}]]</div>
+               </div>
+            </li>
+            <li>
+               <div style="border-bottom: 1px solid #e9e9e9;">
+                  <div style="text-align: center;">
+                     <a href="javascript:void(0);" class="recommend" th:data-uri="@{|/cboard/vote/${cboard.id}|}">
+                        <i class="bi bi-heart">
+                           <span th:text="${#lists.size(cboard.voter)}"></span>
+                        </i>
+                     </a>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div>
+                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
+                     <a class="btn btn-light" th:href="@{|/cboard/list|}" style="width: 300px;">목록으로</a>
+                  </div>
+                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
+                     <a class="btn btn-light" th:href="@{|/cboard/mdate/${cboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}"></a>
+                     		<!-- 가독성을 위한 공백 -->
+                     <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/cboard/delete/${cboard.id}|}" sec:authorize="isAuthenticated()"
+                     	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}" th:text="삭제"></a>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div>
+                  <div class="form-control" aria-label="Disabled input example" style="background-color: #f8f9fa; border-color: #f8f9fa; margin-top: 10px">댓글 [[|${#lists.size(cboard.replyList)} 개|]]</div>
+               </div>
+            </li>
+            <li>	<!-- 댓글 -->
+               <div th:each="reply, loop : ${paging}" th:if="${cboard.id == reply.cboard.id}">
+                  <div style="width: 80%; float: left; border-bottom: 1px solid #e9e9e9; padding-top: 10px;height: 82.33333px;">
+                     <span th:if="${reply.username != null}" th:text="${reply.username.username}"></span> 
+                     <span style="color: gray;" th:if="${reply.mdate == null}">[[${#temporals.format(reply.wdate, 'yyyy.MM.dd HH:mm')}]]</span>
+                     <p>[[${reply.rbody}]]</p>
+                  </div>
+                  <div>
+                     <div style="width: 10%; float: left; text-align: right; padding-top: 28px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
+                        <a class="recommend" th:data-uri="@{|/reply/vote/${reply.id}|}">
+                           <i class="bi bi-hand-thumbs-up">
+                              <span th:text="${#lists.size(reply.voter)}"></span>
+                           </i>
+                        </a>
+                     </div>
+                     <div>
+                        <div style="width: 10%; float: left; text-align: right; padding-top: 20px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
+                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.username}" th:text="삭제"></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </li>      
+         </ul>   
+      </div>	<!-- 댓글 페이징 -->
+      <div th:if="${paging}" aria-label="Page navigation example" style="float: left; padding-top: 10px; padding-left: 495px">
+		<ul style="list-style: none;" class="pagination">
+			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+					<span style="color: black;">이전</span>
+				</a>
+			</li>
+			<li class="page-item" th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+				th:if="${page >= paging.number-3 and page <= paging.number+3}"
+				th:classappend="${page == paging.number} ? 'active'">
+				<a style="color: black;" class="page-link" th:text="${page}" th:href="@{|?page=${page}|}"></a>
+			</li>
+			<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+					<span style="color: black;">다음</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px">
+		<div class="card-header">댓글 쓰기</div>
+			<div class="card-body">
+				<form th:action="@{|/reply/create/${id}|}" th:object="${replyFormDto}" method="post">
+					<p style="color: red;" th:if="${#fields.hasErrors('rbody')}" th:errors="*{rbody}" class="fieldError"></p>
+						<textarea class="card-text" sec:authorize="isAnonymous()" disabled th:field="*{rbody}" rows="5" cols="100" placeholder="댓글작성" id="rbody"></textarea>
+						<textarea sec:authorize="isAuthenticated()" th:field="*{rbody}" rows="5" cols="100" placeholder="댓글작성" id="rbody"></textarea>
+						<input class="btn btn-light" type="submit" value="등록">
+				</form>
+			</div>
+		</div>
+   </div>
+</div>
+</body>
+<script layout:fragment="script" type='text/javascript'>
+   // 게시글 삭제
+   const delete_elements = document.getElementsByClassName("delete");
+   Array.from(delete_elements).forEach(function(element) {
+      element.addEventListener('click', function() {
+         if (confirm("게시글을 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+         };
+      });
+   });
+   // 댓글 삭제
+   const deleteR_elements = document.getElementsByClassName("deleteR");
+   Array.from(deleteR_elements).forEach(function(element) {
+      element.addEventListener('click', function() {
+         if (confirm("삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+         };
+      });
+   });
+   // 게시글 추천
+   const recommend_elements = document.getElementsByClassName("recommend");
+   Array.from(recommend_elements).forEach(function(element) {
+      element.addEventListener('click', function() {
+         if (confirm("추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+         };
+      });
+   });
+</script>
+</html>

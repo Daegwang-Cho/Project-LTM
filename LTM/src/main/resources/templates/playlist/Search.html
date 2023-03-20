@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script>
+	$(document).ready(
+		$('.musicList').empty()		
+	)
+
+	function getMusicHtml(songTitle,singer){
+		var musicHtml =`<ul class="musicList">
+			<li class="songTitle">${songTitle}</li>
+            <li class="singer">${singer}</li>
+        </ul>`
+        $('.musicListList').append(musicHtml)
+}
+
+        function addMusicList(){
+        	var musicKeyWord = $('#songinfo').val()
+        	$('.musicList').empty()
+        	var apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
+        	$.ajax({
+        		type: 'GET',
+        		url: 'http://ws.audioscrobbler.com/2.0/?method=track.search&track=' + musicKeyWord + '&api_key=' + apiKey + '&format=json',
+        		contentType: "application/x-www-form-urlencoded; charset=UTF-8",		
+        		success: function(response){
+        			var musicList = response["results"]["trackmatches"]["track"];
+        			for(var i=0; i<musicList.length; i++){
+        				var songTitle = musicList[i]["name"]
+        				var singer = musicList[i]["artist"]
+        				getMusicHtml(songTitle,singer)
+        			}
+        		}		
+        	})
+        }
+
+</script>
+<body>
+
+	<form action="search" method="post">
+		<label for="songinfo">음악검색하기</label> <input type="text" id="songinfo"
+			name="songinfo" class="whatToSearch" placeholder="검색"
+			autocomplete="off" onkeyup="addMusicList()">
+		<button type="submit">검색</button>
+	</form>
+
+	<div class="musicListList"></div>
+</body>
+</html>

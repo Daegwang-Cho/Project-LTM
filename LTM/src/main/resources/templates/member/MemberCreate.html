@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" 
+	  layout:decorate="~{layout}"
+	  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/css/login.css">
+    <th:block layout:fragment="css">
+    <style>
+        .fieldError {
+            color: #bd2130;
+            font-size: small;
+        }
+    </style>
+</th:block>
+</head>
+<body>
+
+    <div class="main" layout:fragment="content">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form th:action="@{/member/create}" th:object="${memberFormDto}" method="POST" class="register-form" id="register-form">
+                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="fieldError">Incorrect data</p>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" th:field="*{username}" placeholder="아이디"/>
+                            </div>
+                            <p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" class="fieldError">Incorrect data</p>
+                            <div class="form-group">
+                                <label for="password1"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" th:field="*{password1}" placeholder="비밀번호"/>
+                            </div>
+                            <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class="fieldError">Incorrect data</p>
+                            <div class="form-group">
+                                <label for="password2"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" th:field="*{password2}" placeholder="비밀번호 확인"/>
+                            </div>
+                           <!--  <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect data</p>
+                            <div class="form-group">
+                                <label for="id"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" th:field="*{nickname}" placeholder="닉네임"/>
+                            </div> -->
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect data</p>
+							<div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" th:field="*{email}" placeholder="이메일"/>
+                            </div>
+                            <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect data</p>
+                            <div class="form-group">
+					            <label for="phone"><i class="zmdi zmdi-phone"></i></label>
+					            <input type="text" oninput="hypenTel(this)" maxlength="13" th:field="*{phone}" placeholder="연락처">
+					        </div>
+					        <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect data</p>
+					        <div class="form-group">
+					            <label for="birth"><i class="zmdi zmdi-calendar"></i></label>
+					            <input type="date" th:field="*{birth}" placeholder="생년월일"/>
+					        </div>
+					        <div>
+					            <input type="hidden" th:field="*{joindate}">
+					        </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>모든 약관에 동의합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a th:href="@{/member/agree}" class="term-service" style="font-align: right;">약관 보기</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" class="form-submit" style="background-color: #212529; width:100%;" value="회원가입"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="/images/signup-img.png" alt="sing up image"></figure>
+                        <a th:href="@{/member/login}" class="signup-image-link">이미 가입된 회원이신가요?</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<th:block layout:fragment="script">
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/js/login.js"></script>
+    <script>
+	const hypenTel = (target) => {
+		 target.value = target.value
+		   .replace(/[^0-9]/g, '')
+		   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+		}
+	</script>
+</th:block>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
