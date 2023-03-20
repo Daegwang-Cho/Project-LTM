@@ -17,10 +17,10 @@
 <body onload="showImage()">
 	<div layout:fragment="content" class="container" style="padding-top: 130px; padding-left: 80px; width: 1000px; height: 1500px">
 		<div>
-		<img src="/2026001.svg" style="width: 50px;">
-			<h1>공지사항</h1>
+		<img src="/2026001.svg" style="width:50px;">
+			<h1 style="color:white;">공지사항</h1>
 		</div>
-		<table style="width: 90%;">
+		<table style="width: 90%; background-color: white;">
 			<thead>
 				<tr style="border-bottom: 1px solid #e9e9e9; text-align: center; height: 50px">
 					<td style="padding-right: 20px">번호</td>
@@ -38,7 +38,7 @@
 				</td>
 					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;"><span th:if="${adboard.username != null}" th:text="${adboard.username.username}"></span></td>
 					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${#temporals.format(adboard.wdate, 'yyyy.MM.dd')}"></td>
-					<td style="border-bottom: 1px solid #e9e9e9; color:blue; text-align: center;" th:text="${adboard.view}"></td>
+					<td style="border-bottom: 1px solid #e9e9e9; text-align: center;" th:text="${adboard.view}"></td>
 			</tr>
 		</tbody>
 		<div style="height: 0; width:500px; margin-left: 850px;">
