@@ -26,19 +26,23 @@
          <ul style="padding-left: 0;">
             <li>
                <div>
-                  <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9; font-size: x-large;">[[${cboard.ctitle}]]</div>
-                  <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 8px">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</div>
+                  <div style="width: 60%; float: left; font-size: x-large;"><span style="margin-left: 15px;">[[${cboard.ctitle}]]</span></div>
+                  <div style="height:37px; text-align: right; float: left; font-size: small; width: 40%; padding-top: 8px">
+                  <span style="margin-right: 15px;">[[${#temporals.format(cboard.wdate, 'yyyy.MM.dd HH:mm')}]]</span></div>
                </div>
             </li>
-         <li  th:if="${cboard.username != null}">
+         <li th:if="${cboard.username != null}">
             <div>
-               <div style="width: 60%; float: left; border-top: 1px solid #e9e9e9;">[[${cboard.username.username}]]</div>
-               <div style="text-align: right; float: left; font-size: small; width: 40%; border-top: 1px solid #e9e9e9; padding-top: 3px">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</div>      
+               <div style="border-top: 1px solid black; width: 60%; float: left;"><span style="margin-left: 15px;">[[${cboard.username.username}]]</span></div>
+               <div style="border-top: 1px solid black; height:25px; text-align: right; float: left; font-size: small; width: 40%; padding-top: 3px">
+               <span style="margin-right: 15px;">조회수 [[${cboard.view}]] 추천 [[${#lists.size(cboard.voter)}]] 댓글 [[${#lists.size(cboard.replyList)}]]</span></div>      
             </div>
          </li>
          <li>
-            <div style="border-bottom: 1px solid #e9e9e9;">
-               <div style="width: 1110px; height: 400px; text-align: left; float: left; border-top: 1px solid #e9e9e9;" th:utext="${cboard.cbody}"></div>
+            <div>
+               <div style="border-top: 1px solid black; border-bottom: 1px solid black; width: 1110px; height: 400px; text-align: left; float: left;" >
+               <div style="margin-left: 15px;" th:utext="${cboard.cbody}"></div>
+               </div>
             </div>
             <div style="height: 0; width:500px; margin-left: 1000px;">
 				<a th:href="@{/playlist/list}" target="_blank">
@@ -48,12 +52,13 @@
          </li>         
             <li>
                <div>
-                  <div style="color: gray;">해시태그 : [[${cboard.tags}]]</div>
+                  <div style="background-color:white; color: gray; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                  <span style="margin-left: 15px;">해시태그 : [[${cboard.tags}]]</span></div>
                </div>
             </li>
             <li>
-               <div style="border-bottom: 1px solid #e9e9e9;">
-                  <div style="text-align: center;">
+               <div>
+                  <div style="border-top: 1px solid black; background-color:white; text-align: center; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                      <a href="javascript:void(0);" class="recommend" th:data-uri="@{|/cboard/vote/${cboard.id}|}">
                         <i class="bi bi-heart">
                            <span th:text="${#lists.size(cboard.voter)}"></span>
@@ -64,10 +69,10 @@
             </li>
             <li>
                <div>
-                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
+                  <div style="text-align: center; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black;">
                      <a class="btn btn-light" th:href="@{|/cboard/list|}" style="width: 300px;">목록으로</a>
                   </div>
-                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9e9e9;">
+                  <div style="background-color:white; text-align: right; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid black; border-radius: 10px;">
                      <a class="btn btn-light" th:href="@{|/cboard/mdate/${cboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
                      	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}"></a>
                      		<!-- 가독성을 위한 공백 -->
@@ -83,13 +88,13 @@
             </li>
             <li>	<!-- 댓글 -->
                <div th:each="reply, loop : ${paging}" th:if="${cboard.id == reply.cboard.id}">
-                  <div style="width: 80%; float: left; border-bottom: 1px solid #e9e9e9; padding-top: 10px;height: 82.33333px;">
-                     <span th:if="${reply.username != null}" th:text="${reply.username.username}"></span> 
+                  <div style="border-top-left-radius:30px; border-bottom-left-radius:30px; background-color:white; width: 80%; float: left; border-bottom: 1px solid #e9e9e9; margin-top:15px; padding-top: 10px;height: 82.33333px;">
+                     <span style="margin-left: 20px;" th:if="${reply.username != null}" th:text="${reply.username.username}"></span> 
                      <span style="color: gray;" th:if="${reply.mdate == null}">[[${#temporals.format(reply.wdate, 'yyyy.MM.dd HH:mm')}]]</span>
-                     <p>[[${reply.rbody}]]</p>
+                     <p style="margin-left:30px;">[[${reply.rbody}]]</p>
                   </div>
                   <div>
-                     <div style="width: 10%; float: left; text-align: right; padding-top: 28px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
+                     <div style="background-color:white; width: 10%; float: left; text-align: right; margin-top:15px; padding-top: 28px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
                         <a class="recommend" th:data-uri="@{|/reply/vote/${reply.id}|}">
                            <i class="bi bi-hand-thumbs-up">
                               <span th:text="${#lists.size(reply.voter)}"></span>
@@ -97,8 +102,8 @@
                         </a>
                      </div>
                      <div>
-                        <div style="width: 10%; float: left; text-align: right; padding-top: 20px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
-                           <a href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.username}" th:text="삭제"></a>
+                        <div style="border-top-right-radius: 30px; border-bottom-right-radius:30px; background-color:white; width: 10%; float: left; text-align: right; margin-top:15px; padding-top: 20px; border-bottom: 1px solid #e9e9e9; height: 82.33333px;">
+                           <a style="margin-right: 25px;" href="javascript:void(0);" th:data-uri="@{|/reply/delete/${reply.id}|}" class="deleteR btn btn-light" sec:authorize="isAuthenticated()" th:if="${reply.username != null and #authentication.getPrincipal().getUsername() == reply.username.username}" th:text="삭제"></a>
                         </div>
                      </div>
                   </div>
@@ -106,7 +111,7 @@
             </li>      
          </ul>   
       </div>	<!-- 댓글 페이징 -->
-      <div th:if="${paging}" aria-label="Page navigation example" style="float: left; padding-top: 10px; padding-left: 495px">
+      <div th:if="${paging}" aria-label="Page navigation example" style="float: left; padding-top: 10px; padding-left: 460px">
 		<ul style="list-style: none;" class="pagination">
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
 				<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
@@ -125,7 +130,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px">
+	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px; border-radius: 15px;">
 		<div class="card-header">댓글 쓰기</div>
 			<div class="card-body">
 				<form th:action="@{|/reply/create/${id}|}" th:object="${replyFormDto}" method="post">
