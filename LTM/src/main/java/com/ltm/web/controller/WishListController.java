@@ -3,6 +3,7 @@ package com.ltm.web.controller;
 import java.security.Principal;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class WishListController {
 	//내 위시리스트 페이지
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/wishlist")
-	public String showWishList(Principal principal, Model model) {
+	public String showWishList(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 		
 		//로그인된 회원 조회
 		Member member = this.memberService.getMember(principal.getName());
@@ -64,7 +65,7 @@ public class WishListController {
 		model.addAttribute("memberInfo", member);
 		return "playlist/WishList";
 	}
-	
+
 	
 	//위시리스트에서 플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
