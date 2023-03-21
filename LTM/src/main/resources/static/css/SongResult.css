@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+body{
+    	background-image: url('/images/background_wall.png') ;
+    	background-repeat:round;
+			
+    }
+
+	.result{
+		padding: 10px 7px 0;
+		width:75%;
+		margin: auto;
+	}
+	
+	.result-info{
+		display: flex;
+		padding: 10px 0;
+		align-items: center;
+		border-bottom: 1px solid #a7a4a4;
+		color: white;
+	}
+	
+	.info-song{
+	    flex: 1;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: nowrap;
+    	font-size: 17px;
+    	font-weight: bold;
+    	padding-left: 10px;
+    }
+    
+    .info-singer{
+    	flex: 1;
+    	text-align: right;
+    	padding-right: 30px;
+    	font-size: 13px
+    }
+    
+    .inputsong{
+    	padding-right: 7px;
+    }
