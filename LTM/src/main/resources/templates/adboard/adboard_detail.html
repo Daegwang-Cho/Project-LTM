@@ -61,11 +61,11 @@
                   <div style="text-align: center; padding-top: 10px; padding-bottom: 10px;">
                      <a class="btn btn-light" th:href="@{|/adboard/list|}" style="width: 300px;">목록으로</a>
                   </div>
-                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px;">
+                  <div style="text-align: right; padding-top: 10px; padding-bottom: 10px; border-top:1px solid black;">
                      <a class="btn btn-light" th:href="@{|/adboard/mdate/${adboard.id}|}" th:text="수정" sec:authorize="hasRole('ADMIN')"
                      	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.username}"></a>
                      		<!-- 가독성을 위한 공백 -->
-                     <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/adboard/delete/${adboard.id}|}" sec:authorize="isAuthenticated()"
+                     <a style="margin-right: 15px;" href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/adboard/delete/${adboard.id}|}" sec:authorize="isAuthenticated()"
                      	th:if="${adboard.username != null and #authentication.getPrincipal().getUsername() == adboard.username.username}" th:text="삭제"></a>
                   </div>
                </div>

@@ -76,7 +76,7 @@
                      <a class="btn btn-light" th:href="@{|/cboard/mdate/${cboard.id}|}" th:text="수정" sec:authorize="isAuthenticated()"
                      	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}"></a>
                      		<!-- 가독성을 위한 공백 -->
-                     <a href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/cboard/delete/${cboard.id}|}" sec:authorize="isAuthenticated()"
+                     <a style="margin-right: 15px;" href="javascript:void(0);" class="delete btn btn-light" th:data-uri="@{|/cboard/delete/${cboard.id}|}" sec:authorize="isAuthenticated()"
                      	th:if="${cboard.username != null and #authentication.getPrincipal().getUsername() == cboard.username.username}" th:text="삭제"></a>
                   </div>
                </div>
