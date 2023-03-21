@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 </head>
 
-<script th:inline="javascript">
+<!-- <script th:inline="javascript">
 			$('#plModal').on('hidden.bs.modal', function () {
 	    	    $(this).find('form').trigger('reset');
 	    	});
-			</script>
+			</script> -->
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 <body>
 
-<th:block th:fragment="inputSongForm(title,singer)">
+<th:block th:fragment="inputSongForm">
 
 <form th:action="@{/playlist/inputsong}" method="post">
 	  
       <div class="modal-body" style="height: 178px; padding: 1rem;">
+        
+        <input type="text" id="songTitle" name="songTitle"> 
+		<input type="text" id="singer" name="singer">
         
           <div class="mb-3" style="margin: 65px 0; text-align: center;">
             
@@ -30,8 +33,8 @@
 											    border-radius: 0;
 							    				box-shadow: none;">
 				<option style="background: black; color: white;" value="">리스트 선택</option>
-				<option style="background: black; color: white;" th:each="lists : ${myList}" th:value="${lists.id}"
-					th:text="${lists.title}" />
+				<option style="background: black; color: white;" th:each="mylists : ${myList}" th:value="${mylists.id}"
+					th:text="${mylists.title}" />
 			</select>
 
 			
@@ -39,8 +42,8 @@
 			
 			
           </div>
-          	<input type="text" id="songTitle" name="songTitle" th:value="${title}"> 
-			<input type="text" id="singer" name="singer" th:value="${singer}">
+          
+          	
           
           
         
