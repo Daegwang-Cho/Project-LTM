@@ -75,7 +75,7 @@ public class PlayListController {
 		playList.setMember(member);
 
 		playListService.savePl(playList);
-		return "redirect:/main";
+		return "redirect:/playlist/list";
 	}
 
 	// 내 플레이리스트 목록
@@ -177,8 +177,7 @@ public class PlayListController {
 	// 내 플레이리스트에 노래 넣기
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/inputsong")
-	public String inputSongDetail(@RequestParam("songTitle") String songTitle, @RequestParam("singer") String singer,
-			Principal principal, Model model) {
+	public String inputSongDetail(Principal principal, Model model) {
 
 		Member member = this.memberService.getMember(principal.getName());
 
@@ -186,8 +185,7 @@ public class PlayListController {
 		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
 
 		model.addAttribute("myList", myPlayList);
-		model.addAttribute("Title", songTitle);
-		model.addAttribute("singer", singer);
+
 		return "playlist/InputSong";
 	}
 
