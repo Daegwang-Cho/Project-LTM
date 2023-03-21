@@ -14,6 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/js/mypage.js"></script>
 
+<div class="mypage" style="background-color:white; border-radius: 10px;">
 <center><h2>MY PAGE</h2></center>
 <hr style="border-top: 1px solid black; margin: 1rem 5px;">
 
@@ -57,7 +58,7 @@
 					<td> </td>
 					<td>
 						<a class="btn" sec:authorize="isAuthenticated()" th:href="@{/}" th:text="로그아웃"></a>
-						<a class="btn"  th:text="회원정보수정"></a>
+						<!-- <a class="btn"  th:text="회원정보수정"></a> -->
 					</td>
 				</tr>
 			</table>
@@ -65,92 +66,90 @@
 		</div>
  <br>
 <hr style="border-top: 1px solid black; margin: 1rem 5px;">
-
+</div>
 	
 
-
   <!-- contents -->
-  <div class="container">
-  	<div class="tabonoff content-wrap">
-      <!-- 탭메뉴 -->
-      <ul id="tabMenu" class="jq_tab tab-menu">
-        <li>
-          <a href="javascript:void(0);" class="tit"><span>My WishList</span></a>
-        </li>
-        <li>
-          <a href="javascript:void(0);" class="tit"><span>My PlayList</span></a>
-        </li>
-      </ul>
-      <!-- //탭메뉴 -->
-      <div class="cont-wrap">
-      <!-- 탭1_설치 -->
-      <div class="tab-cont">
-        <div class="tabonoff sub-tabs">
+			<div class="container">
+				<div class="tabonoff content-wrap">
+					<!-- 탭메뉴 -->
+					<ul id="tabMenu" class="jq_tab tab-menu">
+						<li><a href="javascript:void(0);" class="tit"
+							style="color: white;"> <span>My WishList</span></a></li>
+						<li><a href="javascript:void(0);" class="tit"
+							style="color: white;"> <span>My PlayList</span></a></li>
+					</ul>
+					<!-- //탭메뉴 -->
 
-      	<div class="cont-wrap cont-box">
-            <!-- IDPW_탭1_1-->
-            <div class="tab-cont">
-                <div class="form-group">
-                    <!-- 플레이리스트 목록 -->
-				<div class="Allplaylist" style="display:grid; grid-template-columns:reapeat(3,1fr); gap:15px;">
-		        	<div class="item" style="position:relative; width:80%; margin:10px auto;"
-		        	th:each="lists: ${wishlist}">
-		        	<table>
-		        		<tr>
-							<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}">
-							<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png">
-							<a th:href="@{/playlist/{id}/song (id=${lists.id})}">
-							<span class="titletext" th:text="${lists.title}"></span>
-							<span class="idtext" th:text="${lists.member.username}"></span>
-							</a>
-							<center><a class="delete btn btn-light" id="buttontext" th:data-uri="@{|/delete/${id} (id=${lists.id})}" sec:authorize="isAuthenticated()"
-							th:if="${lists.id != null }" th:text="삭제"></a></center>
-						</tr>
-					</table>
-					</div>				
-				</div>
-                </div>
-            </div>
-            <!-- //IDPW_탭1_1 -->
-           
-    			</div>
-    		</div>
-    	</div>
-    	<!-- //탭1_설치 -->
-    	<!-- 탭2_미설치 -->
-    	<div class="tab-cont">
-    		<div class="tabonoff sub-tabs">
-             
-                <div class="cont-wrap cont-box">
-                    <!-- 탭2_1 -->
-                    <div class="tab-cont">
-                      <div class="form-group">
-                        <div class="Allplaylist">
-                        
-				        	<div class="item" th:each="mylists: ${myList}">
-								<img class="plimage1" th:if="${mylists.image != null}" th:src="${mylists.image}">
-								<img class="plimage1" th:unless="${mylists.image != null}" src="/img/nullsongimg.png">
-								<a th:href="@{/playlist/{id}/song (id=${mylists.id})}">
-								<span class="titletext" th:text="${mylists.title}"></span>
-								<span class="idtext" th:text="${mylists.member.username}"></span>
-								</a>
-								<center><a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}" sec:authorize="isAuthenticated()"
-								th:if="${mylists.id != null }" th:text="삭제"></a></center>
-		
-							</div>				
+					<div class="cont-wrap"style="background-color: white; border-radius: 10px;">
+
+						<!-- 탭1_설치 -->
+						<div class="tab-cont">
+							<div class="tabonoff sub-tabs">
+								<div class="cont-wrap cont-box">
+									<div class="tab-cont">
+
+										<div class="form-group">
+											<!-- 플레이리스트 목록 -->
+											<div class="Allplaylist">
+												<div class="item" th:each="lists: ${wishlist}">
+													<img class="plimage1" th:if="${lists.image != null}" th:src="${lists.image}"> 
+														<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png"> 
+														<a th:href="@{/playlist/{id}/song (id=${lists.id})}"> 
+														<span class="titletext" th:text="${lists.title}"></span> 
+														<span class="idtext" th:text="${lists.member.username}"></span>
+													</a>
+													<center>
+														<a class="delete btn btn-light" id="buttontext"
+															th:data-uri="@{|/delete/${id} (id=${lists.id})}"
+															sec:authorize="isAuthenticated()"
+															th:if="${lists.id != null }" th:text="삭제"></a>
+													</center>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+						<!-- //탭1_설치 -->
+						<!-- 탭2_미설치 -->
+						<div class="tab-cont">
+							<div class="tabonoff sub-tabs">
 
-                      </div>
-                    </div>
-                    <!-- //탭2_1 -->
-  					</div>
-  				</div>
-  			</div>
-  			<!-- //탭2_미설치 -->                 
-  		</div>                      
-  	</div>
-  </div>
-  <!-- //contents -->
+								<div class="cont-wrap cont-box">
+									<!-- 탭 myplaylist -->
+									<div class="tab-cont" >
+										<div class="form-group">
+											<div class="Allplaylist">
+												<div class="item" th:each="mylists: ${myList}"
+													style="display: grid;">
+													<img class="plimage1" th:if="${mylists.image != null}" th:src="${mylists.image}"> 
+														<img class="plimage1" th:unless="${mylists.image != null}" src="/img/nullsongimg.png"> 
+														<a th:href="@{/playlist/{id}/song (id=${mylists.id})}"> 
+														<span class="titletext" th:text="${mylists.title}"></span> 
+														<span class="idtext" th:text="${mylists.member.username}"></span>
+														</a>
+													<center>
+														<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}"
+															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="삭제"></a>
+													</center>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<!-- //탭 myplaylist -->
+								</div>
+							</div>
+						</div>
+						<!-- //탭2_미설치 -->
+					</div>
+				</div>
+			</div>
+			<!-- //contents -->
 
 </div>
 </div>

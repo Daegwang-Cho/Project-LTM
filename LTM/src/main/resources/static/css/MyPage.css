@@ -9,54 +9,19 @@
 	
 }
 
+.content-wrap .tab
+
 .container{width:1280px; margin:0 auto; margin-top:100px; margin-bottom:160px;}
 
-.content-wrap{display:block; clear:both;*zoom:1; width:1024px; margin:0 auto;}
+.content-wrap{display:grid; clear:both;*zoom:1; width:1024px; margin:0 auto;}
 .content-wrap:after{display:block; height:0;content:".";font-size:0;visibility:hidden;clear:both;}
-.content-wrap .form-group{width:200px; margin:0 auto;}
-.content-wrap>.tab-conts{display:block; float:left; width:100%;clear:both;color:#fff; width:1024px;}
+.content-wrap .form-group{width:200px; margin:0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;}
+.content-wrap>.tab-conts{display:grid; float:left; width:100%;clear:both;color:#fff; width:1024px;}
 .content-wrap .tab-menu{position:relative; width:440px; margin:0 auto; height:40px;}
-.content-wrap .tab-menu::after{display:block; content:''; width:1px; height:36px; background:#b7b7b7; position:absolute; top:0; left:50%; transform:translateX(-50%);}
-.content-wrap .tab-menu li::before{display:block; content:''; clear:both;}
+.content-wrap .tab-menu::after{display:grid; content:''; width:1px; height:36px; background:#b7b7b7; position:absolute; top:0; left:50%; transform:translateX(-50%);}
+.content-wrap .tab-menu li::before{display:grid; content:''; clear:both;}
 .content-wrap .tab-menu li{float:left; width:45%; height:44px; font-size:30px; vertical-align:middle; font-family:'NotoM'; color:#a2a3a3;}
 .content-wrap .tab-menu li:first-of-type{margin-right:5%;}
 .content-wrap .tab-menu li:last-of-type{margin-left:5%;}
-.content-wrap .tab-menu li a{display:block; width:100%; text-align:center;}
+.content-wrap .tab-menu li a{display:grid; width:100%; text-align:center;}
 
-.content-wrap.AllPlaylist{
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 15px;
-}
-.content-wrap.AllPlaylist.item{
-	position: relative;
-	width: 80%;
-	margin: 10px auto;
-}
-.content-wrap.AllPlaylist.item.plimage1{
-	width: 100%;
-	vertical-align: middle;
-	border-radius: 30px;
-	background-color: rgba(0,0,0, 0.4);
-	filter: brightness(85%);
-}
-.content-wrap.AllPlaylist.item.titletext {
-	position: absolute;
-	top: 10%;
-	left: 7%;
-	z-index: 1;
-	color: white;
-	font-size: 22px;
-	font-weight: bold;
-}
-
-.content-wrap.AllPlaylist.item.idtext {
-	position: absolute;
-	top: 85%;
-	left: 80%;
-	transform: translate(-50%, -50%);
-	z-index: 1;
-	color: white;
-	font-size: 20px;
-	font-weight: bold;
-}

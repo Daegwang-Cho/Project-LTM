@@ -13,8 +13,7 @@
 
 
 
-<div layout:fragment="content"
-		class="container" style="margin-top: 200px;">
+<div layout:fragment="content" class="container" style="margin-top: 200px;">
 
 
 
@@ -60,31 +59,26 @@
 						<div class="input-group" style="width: 100%;">
 							<input type="text" id="search_kw" class="form-control"
 								th:value="${kw}">
-							<button class="btn btn-outline-secondary" type="button"
-								id="btn_search">검색</button>
+							<button class="btn btn-outline-secondary" type="button" id="btn_search" style="background-color: white;">
+								<i class="bi bi-search" style="color: black;"></i>
+							</button>
 						</div>
 					</li>
 				</ul>
 			</div>
 
-			<hr style="border-top: 1px solid black; margin: 1rem 35px;">
+			<hr style="border-top: 1px solid white; margin: 1rem 5px;">
 
 			<!-- 플레이리스트 목록 -->
-			<div class="Allplaylist">
+			<div class="Allplaylist" style="background-color:white; border-radius: 10px;">
 				<div class="item" th:each="Playlist, PlaylistStatus : ${paging}">
 
 					<a th:href="@{/playlist/{id}/song (id=${Playlist.id})}"> 
-					<img class="plimage1" th:if="${Playlist.image != null}"
-						th:src="${Playlist.image}"> <img class="plimage1"
-						th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
+					<img class="plimage1" th:if="${Playlist.image != null}" th:src="${Playlist.image}"> 
+						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
 
 						<span class="titletext" th:text="${Playlist.title}"></span> 
 						<span class="idtext" th:text="${Playlist.member.username}"></span></a>
-						
-
-						
-					
-
 				</div>
 			</div>
 
@@ -116,7 +110,7 @@
 						type="hidden" id="page" name="page" th:value="${paging.number}">
 				</form>
 			</div>
-
+		<br><br>
 		</div>
 
 
