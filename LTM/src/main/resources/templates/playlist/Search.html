@@ -32,6 +32,7 @@
 
         function addMusicList(){
         	var musicKeyWord = $('#songinfo').val();
+  	
         	$('.musicListList').empty().remove();
         	var apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
         	$.ajax({
@@ -65,7 +66,7 @@
 		
 <div class="container" style="margin-top: 200px;">
 
-	<form action="search" method="post">
+	<form name="frm" action="search" method="post">
 	<div class="search-bar">
 		<input type="text" id="songinfo"
 			name="songinfo" class="whatToSearch" placeholder="검색"
@@ -84,5 +85,8 @@
 	
 
 	<div th:replace="~{footer :: footerFragment}"></div>
+	
+	
 </body>
+
 </html>
