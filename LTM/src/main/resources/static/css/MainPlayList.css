@@ -75,6 +75,15 @@ li {
 	font-size: 20px;
 	font-weight: bold;
 }
+/* #buttontext{
+	position: absolute;
+	top: 10%;
+	left: 80%;
+	z-index: 1;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+} */
 
 .item2 tr td{
 	
@@ -218,3 +227,12 @@ transform: rotateY(-70deg);
   transform: rotate(135deg);
 }
 
+.wish_pl_song{
+	border-collapse: separate;
+	border-spacing: 10px 10px;
+}
+
+.item1 .btn{
+	background-color:#dcdcdc;
+	opacity: 0.5
+}
