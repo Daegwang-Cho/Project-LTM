@@ -28,7 +28,7 @@
 				<label for="recipient-name" class="recipient-name" >
 					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">제목 :</span>
 				</label> 
-				<input type="text" class="form-control" id="form-control" name="title"
+				<input type="text" class="form-control" id="form-control" name="title" 
 				style="position: absolute;
 				       margin: 18px 30px;
 				       left: 70px;
@@ -78,10 +78,22 @@
 							    transition: all 0.5s;">
     					만들기</button>
 			</div>
+			<script type="text/javascript">
+			$('#plModal').on('hidden.bs.modal', function () {
+	    	    $(this).find('form').trigger('reset');
+	    	});
+			</script>
+			
 		</form>
 	<!-- 	</div> -->
 
 </th:block>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 </body>
+
+
 
 </html>
