@@ -63,7 +63,8 @@ public class PlayListController {
 			Principal principal) {
 
 		if (result.hasErrors()) {// 에러가 있으면 다시 회원가입폼으로 이동
-			return "playlist/createPlForm";
+			
+			return "redirect:/playlist/list";
 		}
 
 		Member member = this.memberService.getMember(principal.getName());

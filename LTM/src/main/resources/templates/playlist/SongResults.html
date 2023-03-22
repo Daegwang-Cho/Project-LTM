@@ -35,23 +35,22 @@
 			<li class="info-song" th:text="${lists.name}"></li>
 			<li class="info-singer" th:text="${lists.artist}"></li>
 			
-			<li class="inputsong"><a sec:authorize="isAuthenticated()" href="#inputModal" data-toggle="modal">노래넣기</a>
-							<!-- 회원 id까지 넣어주기 -->
-		
+			<li class="inputsong">
+			<a sec:authorize="isAuthenticated()" class="open-modal" 
+				href="#inputModal" data-toggle="modal" 
+				th:data-title="${lists.name}"
+				th:data-singer="${lists.artist}">노래넣기</a>
+		</li>
+		</ul>
+	</div>
 		<!-- Modal -->
 		<div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 	        	<div class="modal-content" style="width: 350px; height: 230px; margin: auto; background: black;">
-					<th:block th:replace="~{playlist/InputSong :: inputSongForm(title=${lists.name}, singer=${lists.artist})}"></th:block>
+					<th:block th:replace="~{playlist/InputSong :: inputSongForm}"></th:block>
 				</div>
 			</div>
 		</div>
-		</li>
-		</ul>
-	</div>
-			
-		
-	
 		
 		
 
@@ -74,15 +73,26 @@
     }
 </script> -->
 <!-- 모달 자바스크립트 -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script type="text/javascript">
   
-	var myModal = new bootstrap.Modal(document.getElementById("inputModal"), {});
+	/* var myModal = new bootstrap.Modal(document.getElementById("inputModal"), {});
       document.onreadystatechange = function () {
       myModal.show();
-     
-      
-      }; 
+      };  */
 
+        
+      
+      $(document).ready(function () {
+    	    $(".open-modal").click(function () {
+    	    	 var songTitle = $(this).data('title');
+    	    	 var singer = $(this).data('singer');
+    	    	 $(".modal-body #songTitle").val(songTitle);
+    	    	 $(".modal-body #singer").val(singer);
+    	        $('#inputModal').modal('show');
+    	    });
+    	});
+      
    </script>
    
    
@@ -97,6 +107,8 @@
    </script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+  
    <!-- <script src="./app.js"></script> -->
    <!-- 모달 스크립트 끝 -->
    

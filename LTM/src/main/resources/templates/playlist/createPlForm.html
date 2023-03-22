@@ -18,17 +18,18 @@
 
 	<!-- <div class="content"> -->
 		
-		<form th:action="@{/playlist/new}" th:object="${playListFormDto}"
+		<form name="create" th:action="@{/playlist/new}" th:object="${playListFormDto}"
 			method="post">
 			<div class="modal-header" style="padding:24px 24px 0; border-bottom: none;">
 				<h2 style="color: white;">플레이리스트 만들기</h2>
 			</div>
 			<div class="modal-body" style="min-height: 205px; padding: 30px 20px 0;">
+			<!-- <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect data</p> -->
 			<div class="mb-3" style="display: block; height: 100px; width: 480px; position: absolute;">
 				<label for="recipient-name" class="recipient-name" >
 					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">제목 :</span>
 				</label> 
-				<input type="text" class="form-control" id="form-control" name="title" 
+				<input type="text" class="form-control" id="title" name="title"
 				style="position: absolute;
 				       margin: 18px 30px;
 				       left: 70px;
@@ -64,7 +65,7 @@
 			
 			<div class="modal-footer" style="border-top: none; display: flex; justify-content: flex-end; padding: 30px 35px 24px; gap: 30px;">
 				<!-- <button type="button" class="btn-cancel">취소</button> -->
-				<button type="submit" class="btn btn-primary"
+				<button type="submit" class="btn btn-primary" th:onclick="chkForm();"
 						style="position: relative;
 							    background-color:white;
 							    color: black;
@@ -84,6 +85,20 @@
 	<!-- 	</div> -->
 
 </th:block>
+
+<script>
+function chkForm() {
+	var title = document.getElementById("title");
+	
+	  if(title.value == ""){
+	      alert("필수 입력란");
+	      title.focus();
+	      return false;
+	  };
+
+	  document.create.submit();
+	}
+</script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
