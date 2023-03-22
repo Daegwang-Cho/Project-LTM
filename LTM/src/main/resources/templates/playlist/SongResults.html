@@ -20,10 +20,13 @@
 	<!-- <h1><input type="hidden" th:text="${searchWord}"> 검색 결과</h1> -->
 	<form action="search" method="post">
 		<div class="search-bar">
+			<button class="submit-button" type="submit">
+				<i class="bi bi-search" id="img" style="color: white;"></i>
+			</button>
 			<input type="text" id="songinfo"
 				name="songinfo" class="whatToSearch" placeholder="검색"
 				autocomplete="off" onkeyup="addMusicList()">
-			<button class="submit-button" type="submit">돋보기</button>
+			
 		</div>
 	</form>
 	
@@ -39,7 +42,9 @@
 			<a sec:authorize="isAuthenticated()" class="open-modal" 
 				href="#inputModal" data-toggle="modal" 
 				th:data-title="${lists.name}"
-				th:data-singer="${lists.artist}">노래넣기</a>
+				th:data-singer="${lists.artist}">
+					<img class="modal-img" src="/img/nullsongimg.png" />
+				</a>
 		</li>
 		</ul>
 	</div>

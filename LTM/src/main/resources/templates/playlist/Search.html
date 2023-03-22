@@ -22,7 +22,7 @@
 		var musicHtml =`
 		<div class="musicListList" >
 			<ul class="musicList">
-				<li class="img">돋보기</li>
+				<i class="bi bi-search" id="img" style="color: white;"></i>
 				<li class="songTitle">${songTitle}</li>
             	<li class="singer">${singer}</li>
         	</ul>
@@ -68,10 +68,13 @@
 
 	<form name="frm" action="search" method="post">
 	<div class="search-bar">
+	<button class="submit-button" type="submit">
+		<i class="bi bi-search" id="img" style="color: white;"></i>
+	</button>
 		<input type="text" id="songinfo"
 			name="songinfo" class="whatToSearch" placeholder="검색"
 			autocomplete="off" onkeyup="addMusicList()">
-		<button class="submit-button" type="submit">돋보기</button>
+		
 	</div>
 	</form>
 <hr style="border-top: 1px solid black; margin:revert; width: 50%;">

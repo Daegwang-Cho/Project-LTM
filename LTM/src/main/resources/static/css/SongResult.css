@@ -40,3 +40,8 @@ body{
     .inputsong{
     	padding-right: 7px;
     }
+    
+    .modal-img{
+    	width:20px; 
+    	height:20px;
+    }

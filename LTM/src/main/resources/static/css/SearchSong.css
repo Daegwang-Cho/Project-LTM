@@ -17,7 +17,7 @@
     	color: white;
     	border: none;
     	border-radius: 10px;
-    	padding-left: 15px;
+    	padding-left: 5px;
 	}
 	.whatToSearch:focus{
 		outline: none;
@@ -27,7 +27,8 @@
 		border: none;
     	background: transparent;
     	color: white;
-    	padding-right: 10px
+    	
+    	padding-top: 5px;
 	}
 	
 	.submit-button:focus{
@@ -53,7 +54,7 @@
 		align-items: center;
 	}
 	
-	.img{
+	#img{
 		display: inline-flex;
 		padding: 0 16px;
 	}
