@@ -112,10 +112,9 @@ public class WishListController {
 	//위시리스트에서 플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{id}")
-	public String wl_plDelete(Principal principal, @RequestParam("id") Long plId) {
+	public String wl_plDelete(Principal principal, @RequestParam("id") Long id) {
 		
-		PlayList playlist = this.playListService.findOne(plId);
-		WishList wishList = this.wishListService.getWishList(playlist);
+		WishList wishList = this.wishListService.getWishList(id);
 		
 		this.wishListService.deletePl(wishList);
 		return "redirect:/main";

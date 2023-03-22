@@ -16,6 +16,6 @@ public interface WishListRepository extends JpaRepository<WishList, Long>{
 	@Query(value = "select w.pl_id from wish_list w where w.id_num = :memberId", nativeQuery =true)
 	public List<Long> findWishList(@Param(value = "memberId") Integer memberId);
 	
-	WishList findByPlId(PlayList pl);
+	
 	
 }

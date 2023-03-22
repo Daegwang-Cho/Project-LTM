@@ -62,10 +62,10 @@ public class WishListService {
 		this.wishListRepository.delete(wishList);
 	}
 	
-	public WishList getWishList(PlayList playList) {
-		WishList wishList = this.wishListRepository.findByPlId(playList);
-		if(wishList != null) {
-			return wishList;
+	public WishList getWishList(Long plId) {
+		Optional<WishList> wishList = this.wishListRepository.findById(plId);
+		if(wishList.isPresent()) {
+			return wishList.get();
 		} else {
 			throw new DataNotFoundException("not found");
 		}
