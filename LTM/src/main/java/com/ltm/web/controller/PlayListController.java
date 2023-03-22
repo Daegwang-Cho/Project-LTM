@@ -27,6 +27,7 @@ import com.ltm.web.Service.PlSongService;
 import com.ltm.web.Service.PlayListService;
 import com.ltm.web.Service.WishListService;
 import com.ltm.web.api.SongImageApi;
+import com.ltm.web.entity.Cboard;
 import com.ltm.web.entity.Member;
 import com.ltm.web.entity.playlist.PlSong;
 import com.ltm.web.entity.playlist.PlayList;
@@ -111,11 +112,11 @@ public class PlayListController {
 	}
 
 	// 플레이리스트 삭제
-	@PostMapping("/delete")
-	public String deletePl(@RequestParam("plId") Long plId) throws Exception {
-		playListService.deletePl(plId);
-		return "redirect:/playlist/mylist";
-	}
+//	@PostMapping("/delete")
+//	public String deletePl(@RequestParam("plId") Long plId) throws Exception {
+//		playListService.deletePl(plId);
+//		return "redirect:/playlist/mylist";
+//	}
 
 	// 페이징 처리된 전체 플레이리스트
 	@GetMapping("/list")
@@ -160,8 +161,7 @@ public class PlayListController {
 		 * playlist.getId()) { System.out.println("888888888");
 		 * model.addAttribute("findWl",findWl.get(i).getId()); } }
 		 */
-		int flag = 0;
-		int idx = 0;
+		
 		if (findWl.size() == 0) {
 			model.addAttribute("findWl",null);
 		}else if(findWl.size() > 0){
@@ -185,12 +185,12 @@ public class PlayListController {
 	}
 
 	// 플레이리스트 노래 삭제
-	@PostMapping("/{plId}/song")
-	public String removeSong(@RequestParam("plSongId") Long plSongId) {
-		PlSong plSong = plSongService.findOne(plSongId);
-		plSongRepository.delete(plSong);
-		return "redirect:/playlist/{plId}/song";
-	}
+//	@PostMapping("/{plId}/song")
+//	public String removeSong(@RequestParam("plSongId") Long plSongId) {
+//		PlSong plSong = plSongService.findOne(plSongId);
+//		plSongRepository.delete(plSong);
+//		return "redirect:/playlist/{plId}/song";
+//	}
 
 	// 컨트롤러 이동 생각해보기
 	// 내 플레이리스트에 노래 넣기
@@ -241,6 +241,22 @@ public class PlayListController {
 		
 		this.playListService.deletePlsong(plSong);
 		return "redirect:/playlist/list";
+	}
+	
+	//플레이리스트 삭제
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/delete/{plId}")
+	public String cboardDelete(Principal principal, @PathVariable("plId") Integer plId) {
+		
+		Member member = this.memberService.getMember(principal.getName());
+		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
+		
+		if(!playList.getMember().getUsername().equals(principal.getName())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+		}
+	
+		this.playListService.deletePlayList(playList);
+		return "redirect:/wishlist";
 	}
 
 	// 플레이리스트 상세페이지에서 위시리스트 담기

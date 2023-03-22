@@ -114,7 +114,7 @@
 							</div>
 						</div>
 						<!-- //탭1_설치 -->
-						<!-- 탭2_미설치 -->
+						<!-- 탭2 MyPlaylist -->
 						<div class="tab-cont">
 							<div class="tabonoff sub-tabs">
 
@@ -132,8 +132,12 @@
 														<span class="idtext" th:text="${mylists.member.username}"></span>
 														</a>
 													<center>
-														<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}"
-															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="삭제"></a>
+														<!-- <a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}"
+															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="삭제"></a> -->
+													<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${mylists.id}}"
+				 										sec:authorize="isAuthenticated()" 
+				 										th:if="${mylists != null and #authentication.getPrincipal().getUsername() == mylists.member.username}" 
+				 										th:text="삭제">></a>
 													</center>
 
 												</div>

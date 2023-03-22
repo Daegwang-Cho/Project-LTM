@@ -53,11 +53,13 @@
 								</span>
 
 							</a>
-								<span class="distinct"
+							<div class="distinct">
+								<span class="delete btn btn-light"
 								 	sec:authorize="isAuthenticated()"
 									th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}
 									or ${Playlist.id} == ${findWl}" th:text="좋아요"> 
 								</span>
+							</div>
 
 						</li>
 						</ul>
