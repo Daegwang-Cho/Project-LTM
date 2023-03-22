@@ -103,11 +103,11 @@ public class PlayListController {
 	}
 
 	@PostMapping("/update")
-	public String updateInfo(@RequestParam("id") Long plId, @RequestParam("title") String title,
+	public String updateInfo(@RequestParam("plId") Long plId, @RequestParam("title") String title,
 			@RequestParam("discription") String discription) throws Exception {
 		playListService.updatePl(plId, title, discription);
 
-		return "redirect:/playlist/mylist";
+		return "redirect:/wishlist";
 	}
 
 	// 플레이리스트 삭제

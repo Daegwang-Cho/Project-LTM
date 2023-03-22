@@ -1,33 +1,99 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org" lang="en">
 <head>
+	<link rel="stylesheet" href="/css/PlaylistModal.css">
+</head>
+
 <style>
-.fieldError {
-	border-color: #bd2130;
+
+	
+	button:hover{
+    	background: #606060;
+    	color: white;
+    	transition: all 0.3s;
 }
 </style>
 <body>
-	<div class="container">
+<th:block th:fragment="updateForm">
+
+	<!-- <div class="content"> -->
 		
-		<form role="form" action="/playlist/update" th:object="${listInfo}"
+		<form name="update" th:action="@{/playlist/update}"
 			method="post">
-			<input type="hidden"
-					th:field="*{id}" class="form-control" th:value="${id}">
-			<div class="form-group">
-				<label th:for="title">제목</label> 
-				<input type="text"
-					th:field="*{title}" class="form-control" placeholder="${title}">
+			<div class="modal-header" style="padding:24px 24px 0; border-bottom: none;">
+				<h2 style="color: white;">플레이리스트 수정</h2>
 			</div>
-			<div class="form-group">
-				<label th:for="discription">설명</label> <input type="text"
-					th:field="*{discription}" class="form-control" placeholder="${discription}">
+			<div class="modal-body" style="min-height: 205px; padding: 30px 20px 0;">
+			
+				<input type="hidden" id="plId" name="plId">
+			
+			<div class="mb-3" style="display: block; height: 100px; width: 480px; position: absolute;">
+				<label for="recipient-name" class="recipient-name" >
+					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">제목 :</span>
+				</label> 
+				<input type="text" class="form-control" id="plTitle" name="title"
+				style="position: absolute;
+					   padding: 0 5px;
+				       margin: 18px 30px;
+				       left: 70px;
+				       height: 28px;
+				       width: 65%;
+				       border: 0;
+				       border-bottom: 1px solid white;
+				       border-radius: 0;
+				       box-shadow: none;
+				       background: transparent;
+				       font-size: 15px;
+				       color: white;">
+			</div>
+			<div class="mb-3" style="display: block; height: 100px; width: 480px; position: absolute; top: 50%; bottom: 50%;">
+				<label for="discription" class="col-form-label">
+					<span style="position: absolute; margin: 35px 15px; font-size: 18px; color: white;">설명: </span>
+				</label> 
+				<input type="text" class="form-control" id="discription" name="discription"
+						style="position: absolute;
+							    margin: 18px 30px;
+							    padding: 0 5px;
+							    left: 70px;
+							    height: 28px;
+							    width: 65%;
+							    border: 0;
+							    border-bottom: 1px solid white;
+							    border-radius: 0;
+							    box-shadow: none;
+							    background: transparent;
+							    font-size: 15px;
+							    color: white;">
+			</div>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<div class="modal-footer" style="border-top: none; display: flex; justify-content: flex-end; padding: 30px 35px 24px; gap: 30px;">
+				<!-- <button type="button" class="btn-cancel">취소</button> -->
+				<button type="submit" class="btn btn-primary"
+						style="position: relative;
+							    background-color:white;
+							    color: black;
+							    border:none;
+							    border-radius:20px;
+							    box-shadow: none;
+							    width: 74px;
+							    height:36px;
+							    text-align: center;
+							    cursor: pointer;
+							    transition: all 0.5s;">
+    					수정</button>
+			</div>
+			
 		</form>
-		<br />
+	<!-- 	</div> -->
 
-	</div>
-	<!-- /container -->
+</th:block>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 </body>
+
+
+
 </html>

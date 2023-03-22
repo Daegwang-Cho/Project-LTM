@@ -13,6 +13,20 @@
  
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/js/mypage.js"></script>
+<script type="text/javascript">
+  
+$(document).ready(function () {
+    $(".open-update").click(function () {
+    	 var plId = $(this).data('id');
+    	 var plTitle = $(this).data('title');
+    	 var discription = $(this).data('discription');
+    	 $(".modal-body #plId").val(plId);
+    	 $(".modal-body #plTitle").val(plTitle);
+    	 $(".modal-body #discription").val(discription);
+        $('#updateModal').modal('show');
+    });
+});
+   </script>
 
 <div class="mypage" style="background-color:white; border-radius: 10px;">
 <center><h2>MY PAGE</h2></center>
@@ -131,13 +145,29 @@
 														<span class="titletext" th:text="${mylists.title}"></span> 
 														<span class="idtext" th:text="${mylists.member.username}"></span>
 														</a>
-													<center>
+													
 														<a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}"
 															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="삭제"></a>
-													</center>
-
+														
+													
+													<!-- th:data-uri="@{playlist/{id}/update (id=${mylists.id})}" -->
+													<a class="open-update btn btn-light" href="#updateModal" data-toggle="modal"
+															th:data-title="${mylists.title}" th:data-discription="${mylists.discription}"
+															th:data-id="${mylists.id}"		
+															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="수정"
+															></a>
+													<!-- Modal -->
+											        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											          <div class="modal-dialog modal-dialog-centered">
+								        				<div class="modal-content" style="width: 560px; height: 380px; background: black;">
+											          		<th:block th:replace="~{playlist/UpdatePlayList :: updateForm}"></th:block>
+											            </div>
+											          </div>
+											        </div>
 												</div>
 											</div>
+											
+											
 
 										</div>
 									</div>
@@ -145,6 +175,8 @@
 								</div>
 							</div>
 						</div>
+						
+						
 						<!-- //탭2_미설치 -->
 					</div>
 				</div>
@@ -155,7 +187,9 @@
 </div>
 
 
-<script layout:fragment="script" type='text/javascript'>
+<th:block layout:fragment="script">
+
+<script type='text/javascript'>
 	   const delete_elements = document.getElementsByClassName("delete");
 	   Array.from(delete_elements).forEach(function(element) {
 	      element.addEventListener('click', function() {
@@ -164,9 +198,27 @@
 	         };
 	      });
 	   });
+	   
+	   const update_elements = document.getElementsByClassName("update");
+	   Array.from(update_elements).forEach(function(element) {
+	      element.addEventListener('click', function() {
+	         
+	          location.href = this.dataset.uri;
+	         
+	      });
+	   });
 </script>
 
 
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous">
+   </script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous">
+   </script>
 
+</th:block>
 </body>
 </html>
