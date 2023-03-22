@@ -97,10 +97,11 @@
 														<img class="plimage1" th:unless="${lists.image != null}" src="/img/nullsongimg.png"> 
 														<a th:href="@{/playlist/{id}/song (id=${lists.id})}"> 
 														<span class="titletext" th:text="${lists.title}"></span> 
-														<span class="idtext" th:text="${lists.member.username}"></span>
+														<span style="padding-bottom: 50px" class="idtext" th:text="${lists.member.username}"></span>
 													</a>
 													<center>
-														<a class="delete btn btn-light" id="buttontext"
+														<a	style="margin-top: 10px;"
+															class="delete btn btn-light" id="buttontext"
 															th:data-uri="@{/delete/{id} (id=${lists.id})}"
 															sec:authorize="isAuthenticated()"
 															th:if="${lists.id != null }" th:text="삭제"></a>
@@ -129,12 +130,13 @@
 														<img class="plimage1" th:unless="${mylists.image != null}" src="/img/nullsongimg.png"> 
 														<a th:href="@{/playlist/{id}/song (id=${mylists.id})}"> 
 														<span class="titletext" th:text="${mylists.title}"></span> 
-														<span class="idtext" th:text="${mylists.member.username}"></span>
+														<span style="padding-bottom: 50px" class="idtext" th:text="${mylists.member.username}"></span>
 														</a>
 													<center>
 														<!-- <a class="delete btn btn-light" th:data-uri="@{|/delete/${id} (id=${mylists.id})}"
 															sec:authorize="isAuthenticated()" th:if="${mylists.id != null }" th:text="삭제"></a> -->
-													<a class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${mylists.id}}"
+													<a	style="margin-top: 10px;"
+														class="delete btn btn-light" th:data-uri="@{|/playlist/delete/${mylists.id}}"
 				 										sec:authorize="isAuthenticated()" 
 				 										th:if="${mylists != null and #authentication.getPrincipal().getUsername() == mylists.member.username}" 
 				 										th:text="삭제">></a>
