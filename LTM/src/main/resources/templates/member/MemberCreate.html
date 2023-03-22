@@ -14,7 +14,13 @@
             font-size: small;
         }
     </style>
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      .date_empty:before {
+        content: attr(data-placeholder);
+        width: calc(100% - 42px);
+      }
+    </style>
 </head>
 <body >
 
@@ -55,12 +61,12 @@
                             <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect data</p>
                             <div class="form-group">
 					            <label for="phone"><i class="zmdi zmdi-phone"></i></label>
-					            <input type="text" oninput="hypenTel(this)" maxlength="13" th:field="*{phone}" placeholder="연락처">
+					            <input type="text" oninput="hypenTel(this)" maxlength="13" th:field="*{phone}" placeholder="연락처 (선택)">
 					        </div>
 					        <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect data</p>
 					        <div class="form-group">
 					            <label for="birth"><i class="zmdi zmdi-calendar"></i></label>
-					            <input type="date" th:field="*{birth}" placeholder="생년월일"/>
+					            <input style="color: gray;" class="date_empty placeholder-date" type="date" th:field="*{birth}" data-placeholder="생년월일 (선택)"/>
 					        </div>
 					        <div>
 					            <input type="hidden" th:field="*{joindate}">
@@ -94,6 +100,13 @@
 		   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
 		}
 	</script>
+<script>
+      $("input[type=date].placeholder-date").on("change", (e) => {
+        const target = $(e.target);
+        if (target.val() == "") target.addClass("date_empty");
+        else target.removeClass("date_empty");
+      });
+    </script>
 </th:block>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
