@@ -101,7 +101,7 @@
 													</a>
 													<center>
 														<a class="delete btn btn-light" id="buttontext"
-															th:data-uri="@{|/delete/${id} (id=${lists.id})}"
+															th:data-uri="@{|/delete/${lists.id}|}"
 															sec:authorize="isAuthenticated()"
 															th:if="${lists.id != null }" th:text="삭제"></a>
 													</center>

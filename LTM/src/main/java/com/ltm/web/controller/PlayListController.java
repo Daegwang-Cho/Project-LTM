@@ -152,6 +152,7 @@ public class PlayListController {
 		
 		PlayList playlist = this.playListService.findOne(plId);
 		
+		
 		/*
 		 * for (int i = 0; i < findWl.size(); i++) {
 		 * System.out.println("888888888"+findWl.get(i).getId());
@@ -162,23 +163,17 @@ public class PlayListController {
 		int flag = 0;
 		int idx = 0;
 		if (findWl.size() == 0) {
-			wishListService.saveWishList(member.getIdNum(), plId);
-		}
-		else {
-			for (int i = 0; i < findWl.size(); i++) {
-				if(findWl.get(i).getId() == playlist.getId()) {
-					flag = 1;
-					idx = i;
+			model.addAttribute("findWl",null);
+		}else if(findWl.size() > 0){
+			System.out.println("사이즈 추가?: " + findWl.size());
+			
+			for(PlayList result : findWl) {
+				if(result.getId() == plId) {
+					
+					model.addAttribute("findWl",playlist.getId());
 				}
 			}
-			if(flag == 1) {
-				model.addAttribute("findWl",findWl.get(idx).getId());
-			}
-			else {
-				wishListService.saveWishList(member.getIdNum(), plId);
-				return "redirect:/main";
-			}
-		} 
+		}
 
 		model.addAttribute("playList22", playlist);
 		

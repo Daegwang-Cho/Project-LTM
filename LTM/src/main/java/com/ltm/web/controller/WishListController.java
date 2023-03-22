@@ -42,8 +42,35 @@ public class WishListController {
 		//로그인된 회원 조회
 		Member member = this.memberService.getMember(principal.getName());
 		
-		wishListService.saveWishList(member.getIdNum(), plId);
+		List<PlayList> findWl = wishListService.findWl(member.getIdNum());
+		
+		PlayList playlist = this.playListService.findOne(plId);
 	
+		
+		if (findWl.size() == 0) {
+			System.out.println("사이즈: " + findWl.size());
+			wishListService.saveWishList(member.getIdNum(), plId);
+		}else if(findWl.size() > 0){
+			System.out.println("사이즈 추가?: " + findWl.size());
+			
+			for(PlayList result : findWl) {
+				if(result.getId() != plId) {
+					wishListService.saveWishList(member.getIdNum(), playlist.getId());
+					return "redirect:/playlist/list";
+				}
+			}
+		}
+		
+			/*for (int i = 0; i < findWl.size(); i++) {
+				if(findWl.get(i).getId() != plId) {
+					flag = 1;
+					idx = i;
+				}
+			} 
+			if(flag == 1) {
+				wishListService.saveWishList(member.getIdNum(), plId);
+			} */
+		
 		/*
 		 * List<PlayList> findWl = wishListService.findWl(member.getIdNum());
 		 * 
@@ -73,6 +100,8 @@ public class WishListController {
 		
 		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
 		
+		
+		System.out.println("사이즈는? : " + findWl.size());
 		model.addAttribute("wishlist",findWl);
 		model.addAttribute("myList", myPlayList);
 		model.addAttribute("memberInfo", member);
@@ -83,9 +112,10 @@ public class WishListController {
 	//위시리스트에서 플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{id}")
-	public String wl_plDelete(Principal principal, @RequestParam("id") Long id) {
+	public String wl_plDelete(Principal principal, @RequestParam("id") Long plId) {
 		
-		WishList wishList = this.wishListService.getWishList(id);
+		PlayList playlist = this.playListService.findOne(plId);
+		WishList wishList = this.wishListService.getWishList(playlist);
 		
 		this.wishListService.deletePl(wishList);
 		return "redirect:/main";

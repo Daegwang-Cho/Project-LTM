@@ -43,26 +43,21 @@
 
 						<br>
 						<li>
-						<!-- 이 부분은 내일 다시 만져봐야할 것 같습니다. -->
+						
 							<a sec:authorize="isAuthenticated()"
 								th:onclick="wishlist('[[${Playlist.id}]]')"> 
-							<span class="wish"
-								 sec:authorize="isAuthenticated()"
-								th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}
-								 and ${Playlist.id} != ${findWl}" th:text="좋아요"> 
-							</span>
-							<span class="distinct"
-								 sec:authorize="isAuthenticated()"
-								th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}
-								or ${Playlist.id} == ${findWl}" th:text="좋아요"> 
-							</span>
-							
-							<!-- <span
-								sec:authorize="isAuthenticated()" 
-								th:if="${Playlist.id} == ${findWl}" th:text="distinct" class="distinct"> 
-							</span> -->
-							
+								<span class="wish"
+									sec:authorize="isAuthenticated()"
+									th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}
+								 	and ${Playlist.id} != ${findWl}" th:text="좋아요"> 
+								</span>
+
 							</a>
+								<span class="distinct"
+								 	sec:authorize="isAuthenticated()"
+									th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}
+									or ${Playlist.id} == ${findWl}" th:text="좋아요"> 
+								</span>
 
 						</li>
 						</ul>
@@ -135,7 +130,7 @@
 		document.body.appendChild(form);
 		form.submit();
 
-	}   
+	}
 	
 	const delete_elements = document.getElementsByClassName("delete");
 	   Array.from(delete_elements).forEach(function(element) {
@@ -158,9 +153,9 @@
 		   const distinct_elements = document.getElementsByClassName("distinct");
 		   Array.from(distinct_elements).forEach(function(element) {
 		      element.addEventListener('click', function() {
-		         if (confirm("이미 담겨있는 플레이리스트입니다.")) {
-		            location.href = this.dataset.uri;
-		         };
+		         alert("이미 담겨있는 플레이리스트입니다.");
+		           
+		         
 		      });
 		   });
 </script>
