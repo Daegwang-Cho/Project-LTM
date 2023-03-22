@@ -24,7 +24,7 @@
 						<img class="plimage1" th:unless="${Playlist.image != null}" src="/img/nullsongimg.png">
 					</td>
 					<td style="border-bottom: 0px; text-align: center; padding-right: 20px"></td>
-					<td>
+					<td style="color:white;">
 						<ul>
 							제목:	
 							<li th:text="${Playlist.title}"></li>
@@ -46,19 +46,21 @@
 						<!-- 이 부분은 내일 다시 만져봐야할 것 같습니다. -->
 							<a sec:authorize="isAuthenticated()"
 								th:onclick="wishlist('[[${Playlist.id}]]')"> 
-							<span
+							<span class="wish"
 								 sec:authorize="isAuthenticated()"
-								th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}" th:text="좋아요"> 
+								th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}
+								 and ${Playlist.id} != ${findWl}" th:text="좋아요"> 
 							</span>
-							<span
+							<span class="distinct"
 								 sec:authorize="isAuthenticated()"
-								th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}"> 
+								th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}
+								or ${Playlist.id} == ${findWl}" th:text="좋아요"> 
 							</span>
 							
-							<span
+							<!-- <span
 								sec:authorize="isAuthenticated()" 
-								th:if="${Playlist.id} == ${findWl}" th:text="alert"> 
-							</span>
+								th:if="${Playlist.id} == ${findWl}" th:text="distinct" class="distinct"> 
+							</span> -->
 							
 							</a>
 
@@ -148,6 +150,15 @@
 		   Array.from(wish_elements).forEach(function(element) {
 		      element.addEventListener('click', function() {
 		         if (confirm("위시리스트에 담으시겠습니까?")) {
+		            location.href = this.dataset.uri;
+		         };
+		      });
+		   });
+		
+		   const distinct_elements = document.getElementsByClassName("distinct");
+		   Array.from(distinct_elements).forEach(function(element) {
+		      element.addEventListener('click', function() {
+		         if (confirm("이미 담겨있는 플레이리스트입니다.")) {
 		            location.href = this.dataset.uri;
 		         };
 		      });

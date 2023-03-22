@@ -151,11 +151,33 @@ public class PlayListController {
 		
 		PlayList playlist = this.playListService.findOne(plId);
 		
-		for (int i = 0; i < findWl.size(); i++) {
-			if(findWl.get(i).getId() == playlist.getId()) {
-				model.addAttribute("findWl",findWl.get(i).getId());
-			}
+		/*
+		 * for (int i = 0; i < findWl.size(); i++) {
+		 * System.out.println("888888888"+findWl.get(i).getId());
+		 * System.out.println("888888888"+playlist.getId()); if(findWl.get(i).getId() ==
+		 * playlist.getId()) { System.out.println("888888888");
+		 * model.addAttribute("findWl",findWl.get(i).getId()); } }
+		 */
+		int flag = 0;
+		int idx = 0;
+		if (findWl.size() == 0) {
+			wishListService.saveWishList(member.getIdNum(), plId);
 		}
+		else {
+			for (int i = 0; i < findWl.size(); i++) {
+				if(findWl.get(i).getId() == playlist.getId()) {
+					flag = 1;
+					idx = i;
+				}
+			}
+			if(flag == 1) {
+				model.addAttribute("findWl",findWl.get(idx).getId());
+			}
+			else {
+				wishListService.saveWishList(member.getIdNum(), plId);
+				return "redirect:/main";
+			}
+		} 
 
 		model.addAttribute("playList22", playlist);
 		
@@ -163,6 +185,7 @@ public class PlayListController {
 		List<PlSong> songs = plSongService.findPlSongs(plId);// 리스트로 담는 것도 생각해보기, plsong 연결필요
 		model.addAttribute("song22", songs);
 		return "playlist/Pl_detail";
+		
 	}
 
 	// 플레이리스트 노래 삭제
@@ -232,16 +255,5 @@ public class PlayListController {
 
 		return "redirect:/playlist/list";
 	}
-
-	/*
-	 * 게시글 등록
-	 * 
-	 * public String cboardCreate(@Valid CboardFormDto cboardForm, BindingResult
-	 * bindingResult, Principal principal){ if(bindingResult.hasErrors()) { return
-	 * "cboard/cboard_form"; } Member member =
-	 * this.memberService.getMember(principal.getName());
-	 * this.cboardService.create(cboardForm.getCtitle(), cboardForm.getCbody(),
-	 * member, cboardForm.getTags()); return "redirect:/cboard/list"; // 등록후 목록으로 }
-	 */
 
 }

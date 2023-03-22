@@ -37,13 +37,26 @@ public class WishListController {
 	//플레이리스트를 위시리스트에 넣을 때
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/getwishlist")
-	public String getWishList(@RequestParam("plId") Long plId, Principal principal) {
+	public String getWishList(Model model,@RequestParam("plId") Long plId, Principal principal) {
 		
 		//로그인된 회원 조회
 		Member member = this.memberService.getMember(principal.getName());
-
-		wishListService.saveWishList(member.getIdNum(), plId);
 		
+		wishListService.saveWishList(member.getIdNum(), plId);
+	
+		/*
+		 * List<PlayList> findWl = wishListService.findWl(member.getIdNum());
+		 * 
+		 * PlayList playlist = this.playListService.findOne(plId);
+		 * 
+		 * 
+		 * int flag = 0; int idx = 0; if (findWl.size() == 0) {
+		 * wishListService.saveWishList(member.getIdNum(), plId); } else { for (int i =
+		 * 0; i < findWl.size(); i++) { if(findWl.get(i).getId() == playlist.getId()) {
+		 * flag = 1; idx = i; } } if(flag == 1) {
+		 * model.addAttribute("findWl",findWl.get(idx).getId()); } else {
+		 * wishListService.saveWishList(member.getIdNum(), plId); } }
+		 */
 		return "redirect:/main"; 
 	}
 	
@@ -70,9 +83,10 @@ public class WishListController {
 	//위시리스트에서 플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{id}")
-	public String wl_plDelete(Principal principal, @RequestParam("id") Integer id) {
-		WishList wishList = this.wishListService.getWishList(Long.valueOf(id));
-	
+	public String wl_plDelete(Principal principal, @RequestParam("id") Long id) {
+		
+		WishList wishList = this.wishListService.getWishList(id);
+		
 		this.wishListService.deletePl(wishList);
 		return "redirect:/main";
 	}
