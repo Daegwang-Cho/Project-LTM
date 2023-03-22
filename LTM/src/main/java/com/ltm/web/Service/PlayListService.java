@@ -65,8 +65,8 @@ public class PlayListService {
 	}
 
 	// 플레이리스트 삭제
-	public void deletePl(Long plId) throws Exception {
-		Optional<PlayList> selectPl = playListRepository.findById(plId);
+	public void deletePl(Integer plId) throws Exception {
+		Optional<PlayList> selectPl = playListRepository.findById(Long.valueOf(plId));
 
 		if (selectPl.isPresent()) {
 			PlayList playList = selectPl.get();
@@ -75,6 +75,11 @@ public class PlayListService {
 		} else {
 			throw new Exception();
 		}
+	}
+	
+	//플레이리스트 삭제
+	public void deletePlayList(PlayList playList) {
+		this.playListRepository.delete(playList);
 	}
 	
 //	public String findImage(Long plId) {
@@ -109,7 +114,7 @@ public class PlayListService {
 		}
 	}
 	
-	//플레이리스트 노래목록 삭제하기
+	//플레이리스트 상세페이지에서 노래 삭제하기
 	public void deletePlsong(PlSong plSong) {
 		this.plSongRepository.delete(plSong);
 	}

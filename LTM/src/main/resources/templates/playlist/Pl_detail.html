@@ -43,7 +43,7 @@
 
 						<br>
 						<li>
-						
+						<div class="btn btn-light">
 							<a sec:authorize="isAuthenticated()"
 								th:onclick="wishlist('[[${Playlist.id}]]')"> 
 								<span class="wish"
@@ -58,7 +58,7 @@
 									th:if="${#authentication.getPrincipal().getUsername() == Playlist.member.username}
 									or ${Playlist.id} == ${findWl}" th:text="좋아요"> 
 								</span>
-
+							</div>
 						</li>
 						</ul>
 					</td>
