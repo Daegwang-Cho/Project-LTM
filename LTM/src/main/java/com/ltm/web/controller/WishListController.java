@@ -101,7 +101,6 @@ public class WishListController {
 		List<PlayList> myPlayList = playListService.findMemberPl(member.getIdNum());
 		
 		
-		System.out.println("사이즈는? : " + findWl.size());
 		model.addAttribute("wishlist",findWl);
 		model.addAttribute("myList", myPlayList);
 		model.addAttribute("memberInfo", member);
@@ -112,9 +111,11 @@ public class WishListController {
 	//위시리스트에서 플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{id}")
-	public String wl_plDelete(Principal principal, @RequestParam("id") Long id) {
+	public String wl_plDelete(Principal principal, @PathVariable("id") Long plId) {
 		
-		WishList wishList = this.wishListService.getWishList(id);
+		Member member = this.memberService.getMember(principal.getName());
+		Integer memberId = member.getIdNum();
+		WishList wishList = this.wishListService.getWishList(memberId, plId);
 		
 		this.wishListService.deletePl(wishList);
 		return "redirect:/main";

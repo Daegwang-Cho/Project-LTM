@@ -62,8 +62,10 @@ public class WishListService {
 		this.wishListRepository.delete(wishList);
 	}
 	
-	public WishList getWishList(Long plId) {
-		Optional<WishList> wishList = this.wishListRepository.findById(plId);
+	public WishList getWishList(Integer memberId, Long plId) {
+		
+		Long selectOne = wishListRepository.findByWishListByMember(memberId, plId);
+		Optional<WishList> wishList = this.wishListRepository.findById(selectOne);
 		if(wishList.isPresent()) {
 			return wishList.get();
 		} else {
