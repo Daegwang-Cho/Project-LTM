@@ -36,7 +36,7 @@ public class PlayList {
 	
 	private String image;
 	
-	@OneToMany(mappedBy = "playList",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "playList", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<WishList> wishList;
 
 	@ManyToOne(fetch = FetchType.LAZY)
