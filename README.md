@@ -6,7 +6,7 @@
 
 # WIKI
 
-* WIKI 링크 : [상세보기 - 네이버](https://www.naver.com/)
+* WIKI 링크 : [상세보기 - WIKI](https://github.com/Daegwang-Cho/Project-LTM/wiki)
 
 <br>
 
@@ -30,14 +30,14 @@
 <br>
 
 ## 👫조원
-* 조대광(조장) : PM , FE, BE
-* 한소현 : FE, BE
-* 박성현 : FE, BE
-* [이승훈](https://www.naver.com/) : FE, BE
+* [조대광(조장)](https://github.com/Daegwang-Cho) : PM , FE, BE
+* [한소현](https://github.com/sohyunHAN) : FE, BE
+* [박성현](https://github.com/scars97) : FE, BE
+* [이승훈](https://github.com/1eeseunghun) : FE, BE
 
 <br>
 
-# 주요 기능
+# 주요 기능(미완)
 클릭해서 기능 상세 정보를 보실수 있습니다.
 <br>
 <details>
