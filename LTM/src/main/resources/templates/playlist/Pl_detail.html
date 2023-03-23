@@ -38,16 +38,16 @@
 						
 						<br>
 						<li>
-						<div class="btn btn-light">
+						<div class="">
 							<a sec:authorize="isAuthenticated()"
 								th:onclick="wishlist('[[${Playlist.id}]]')"> 
-								<span class="wish"
+								<span class="wish btn btn-light"
 									sec:authorize="isAuthenticated()"
-									th:if="${#authentication.getPrincipal().getUsername() != Playlist.member.username}
+									th:if="${Playlist.member.username != null and #authentication.getPrincipal().getUsername() != Playlist.member.username}
 								 	and ${Playlist.id} != ${findWl}" th:text="좋아요"> 
 								</span>
 							</a>
-								<span class="distinct"
+								<span class="distinct btn btn-light"
 								 	sec:authorize="isAuthenticated()"
 									th:if="${Playlist.id} == ${findWl}" th:text="좋아요"> 
 								</span>
