@@ -31,11 +31,11 @@ public class MemberFormDto {
 	@AssertTrue(message = "비밀번호가 서로 같지 않습니다.")
 	private boolean isPasswordValidation() {
 		if(password1.equals(password2)) {
-			System.out.println("참");
+			
 			passvali ="비밀번호가 서로 같지 않습니다.";
 			return true;
 		}
-		System.out.println("거짓");
+		
 		return false;
 	}
 	

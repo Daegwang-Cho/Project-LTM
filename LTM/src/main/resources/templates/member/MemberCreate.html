@@ -8,14 +8,12 @@
     <!-- Main css -->
     <link rel="stylesheet" href="/css/login.css">
     <!-- <th:block layout:fragment="css"></th:block> -->
-    <style>
-        .fieldError {
-            color: #bd2130;
-            font-size: small;
-        }
-    </style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+		.fieldError {
+			color: #bd2130;
+			font-size: small;
+        }
       .date_empty:before {
         content: attr(data-placeholder);
         width: calc(100% - 42px);
@@ -38,6 +36,7 @@
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" th:field="*{username}" placeholder="아이디"/>
                             </div>
+                            <p th:if="${#fields.hasErrors('passvali')}" th:errors="*{passvali}" class="fieldError">Incorrect data</p>
                             <p th:if="${#fields.hasErrors('password1')}" th:errors="*{password1}" class="fieldError">Incorrect data</p>
                             <div class="form-group">
                                 <label for="password1"><i class="zmdi zmdi-lock"></i></label>
@@ -99,13 +98,21 @@
 		   .replace(/[^0-9]/g, '')
 		   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
 		}
-	</script>
-<script>
       $("input[type=date].placeholder-date").on("change", (e) => {
         const target = $(e.target);
         if (target.val() == "") target.addClass("date_empty");
         else target.removeClass("date_empty");
       });
+     /*  function is_checked() {
+    	  
+    	  // 1. checkbox element를 찾습니다.
+    	  const checkbox = document.getElementById('agree-term');
+
+    	  // 2. checked 속성을 체크합니다.
+    	  const is_checked = checkbox.checked;
+    	  if(is_checked)
+    		  
+		} */
     </script>
 </th:block>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

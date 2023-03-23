@@ -14,8 +14,13 @@
 	Slide.src= imgArr[ranNum];
 	},2000);
 </script>
+<style>
+	html, body{
+	height:auto;
+	}
+</style>
 </head>
-<body onload="showImage()">
+<body onload="showImage()" >
 <div layout:fragment="content" class="blog-area section_padding_100 mt-100" style="height: auto;">
    <div class="container">
 	  <div>
@@ -130,7 +135,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px; border-radius: 15px;">
+	<div class="card" style="float: left; margin-top: 10px; margin-left: 100px; margin-bottom:100px; border-radius: 15px;">
 		<div class="card-header">댓글 쓰기</div>
 			<div class="card-body">
 				<form th:action="@{|/reply/create/${id}|}" th:object="${replyFormDto}" method="post">
