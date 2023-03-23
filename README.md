@@ -1,6 +1,4 @@
-# LTM
-
-나만의 플레이리스트를 공유하는 커뮤니티 입니다.
+![header](https://capsule-render.vercel.app/api?type=rect&color=0:FF3399,100:8b00ff&text=LTM&fontAlignY=45&fontSize=80&height=200&animation=blinking&desc=나만의%20플레이리스트를%20공유하는%20커뮤니티&descAlignY=70)
 
 <br>
 
@@ -30,10 +28,11 @@
 <br>
 
 ## 👫조원
-* [조대광(조장)](https://github.com/Daegwang-Cho) : PM , FE, BE
-* [한소현](https://github.com/sohyunHAN) : FE, BE
-* [박성현](https://github.com/scars97) : FE, BE
-* [이승훈](https://github.com/1eeseunghun) : FE, BE
+* [<img src="https://user-images.githubusercontent.com/121784780/227198588-b3a24c2f-1ee4-4872-92cf-1d3ef8caef8f.svg" style="width:15px;">
+조대광(조장)](https://github.com/Daegwang-Cho) : PM , FE, BE
+* [<img src="https://user-images.githubusercontent.com/121784780/227198588-b3a24c2f-1ee4-4872-92cf-1d3ef8caef8f.svg" style="width:15px;"> 한소현](https://github.com/sohyunHAN) : FE, BE
+* [<img src="https://user-images.githubusercontent.com/121784780/227198588-b3a24c2f-1ee4-4872-92cf-1d3ef8caef8f.svg" style="width:15px;"> 박성현](https://github.com/scars97) : FE, BE
+* [<img src="https://user-images.githubusercontent.com/121784780/227198588-b3a24c2f-1ee4-4872-92cf-1d3ef8caef8f.svg" style="width:15px;"> 이승훈](https://github.com/1eeseunghun) : FE, BE
 
 <br>
 
