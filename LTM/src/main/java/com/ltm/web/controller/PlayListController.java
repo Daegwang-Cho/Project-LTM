@@ -111,20 +111,11 @@ public class PlayListController {
 		return "redirect:/wishlist";
 	}
 
-	// 플레이리스트 삭제
-//	@PostMapping("/delete")
-//	public String deletePl(@RequestParam("plId") Long plId) throws Exception {
-//		playListService.deletePl(plId);
-//		return "redirect:/playlist/mylist";
-//	}
 
 	// 페이징 처리된 전체 플레이리스트
 	@GetMapping("/list")
 	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "kw", defaultValue = "") String kw) {
-		// List<PlayList> playList = this.playlistService.getlist(); //레퍼지토리를 바로 불러와서
-		// 쓰지않고 서비스를 통해서 사용하도록 작성
-		// model.addAttribute("playList2", playList);
 
 		if ("".compareTo(kw) == 0) {
 			Page<PlayList> paging = this.playListService.getlist(page);	
@@ -153,15 +144,6 @@ public class PlayListController {
 		
 		PlayList playlist = this.playListService.findOne(plId);
 		
-		
-		/*
-		 * for (int i = 0; i < findWl.size(); i++) {
-		 * System.out.println("888888888"+findWl.get(i).getId());
-		 * System.out.println("888888888"+playlist.getId()); if(findWl.get(i).getId() ==
-		 * playlist.getId()) { System.out.println("888888888");
-		 * model.addAttribute("findWl",findWl.get(i).getId()); } }
-		 */
-		
 		if (findWl.size() == 0) {
 			model.addAttribute("findWl",null);
 		}else if(findWl.size() > 0){
@@ -184,15 +166,6 @@ public class PlayListController {
 		
 	}
 
-	// 플레이리스트 노래 삭제
-//	@PostMapping("/{plId}/song")
-//	public String removeSong(@RequestParam("plSongId") Long plSongId) {
-//		PlSong plSong = plSongService.findOne(plSongId);
-//		plSongRepository.delete(plSong);
-//		return "redirect:/playlist/{plId}/song";
-//	}
-
-	// 컨트롤러 이동 생각해보기
 	// 내 플레이리스트에 노래 넣기
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/inputsong")
@@ -246,7 +219,7 @@ public class PlayListController {
 	//플레이리스트 삭제
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete/{plId}")
-	public String cboardDelete(Principal principal, @PathVariable("plId") Integer plId) {
+	public String PlDelete(Principal principal, @PathVariable("plId") Integer plId) {
 		
 		Member member = this.memberService.getMember(principal.getName());
 		PlayList playList = this.playListService.getPl(Long.valueOf(plId));
