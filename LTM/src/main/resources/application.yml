@@ -1,0 +1,37 @@
+server:
+  port:
+    8080
+    
+#MY-SQL
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ltm?serverTimezone=UTC
+    username: root
+    password: 1234
+
+#JPA
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        ddl-auto: update
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      
+#Live reload
+  devtools:
+    livereload:
+      enabled: true
+      
+  main:
+    allow-bean-definition-overriding: true 
+      
+#Log
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descripter:
+            sql: trace
