@@ -19,7 +19,7 @@ public class SearchResultApi {
 public JSONArray songResults(String songInfo){
 		
 		//인증키
-		String apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
+		String apiKey = "xxxxxxxxxxxxx";
 		
 		String encodeSongInfo = "";
 		
