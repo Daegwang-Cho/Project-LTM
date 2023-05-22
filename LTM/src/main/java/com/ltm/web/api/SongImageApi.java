@@ -19,7 +19,7 @@ public class SongImageApi {
 	public List<String> getImage(String songTitle, String singer){
 
 	// 인증키
-	String apiKey = "e63d38bc9de5863a4bbdfa74a087ea38";
+	String apiKey = "xxxxxxxxxxxxx";
 
 	String encodeSinger = "";
 	String encodeSongTitle = "";
